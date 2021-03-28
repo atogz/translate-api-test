@@ -1,17 +1,25 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div>
+      <button @click="translate('Мальчик', 'ru', 'en')">Перевести!</button>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import translate from 'google-translate-open-api';
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  methods: {
+   async translate(value, fromLanguage, toLanguage) {
+      const result = await translate(value, {
+        from: fromLanguage,
+        to: toLanguage,
+        browers: true
+      });
+      const data = result.data[0];
+     console.log(data);
+    }
   }
 }
 </script>
